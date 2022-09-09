@@ -11,39 +11,55 @@ $ npm install
 ## Running the app
 
 ```bash
-# development
-$ npm run start
 
 # watch mode
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
+# build mode
+$ npm run build
+
+# production mode (after build)
+$ npm run start
 ```
 
-## Test
+## Endpoints
 
+### Get JP Location
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+curl --location --request POST 'https://wonder-sg10.herokuapp.com/localizacion' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "antenas":[
+        {
+        "name":"wonderfulAntena1",
+        "distance":10.1,
+        "message":["", "tengo", "", "y", "hambre"]
+        },
+        {
+        "name":"wonderfulAntena2",
+        "distance":15.6,
+        "message":["ayuda", "", "frío", "y", ""]
+        },
+        {
+        "name":"wonderfulAntena3",
+        "distance":12.9,
+        "message":["ayuda", "", "", "", "hambre"]
+        }
+    ]
+}'
 ```
 
-## Support
+### Set Localizacion por partes
+```bash
+curl --location --request POST 'https://wonder-sg10.herokuapp.com/localizacion_por_partes/wonderfulAntena1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "distance":10.1,
+    "message":["", "tengo", "", "y", "hambre"]
+}'
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+### Get Localizacion por partes
+```bash
+curl --location --request GET 'https://wonder-sg10.herokuapp.com/localizacion_por_partes'
+```

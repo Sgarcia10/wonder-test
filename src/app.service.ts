@@ -58,7 +58,7 @@ export class AppService {
         this.infoAntena3 = antena
         break;
       default:
-        break;
+        throw new HttpException('Antena no reconocida', HttpStatus.BAD_REQUEST);
     }
   }
 
